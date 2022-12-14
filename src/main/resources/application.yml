@@ -1,0 +1,53 @@
+spring:
+  h2:
+    console:
+      enabled: true
+      path: /console
+  datasource:
+    #url: jdbc:h2:mem:testdb
+    url: jdbc:h2:~/serasadb
+    username: sa
+    password:
+    driverClassName: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jws-algorithm: RS512
+          jwk-set-uri: https://idp.example.org/.well-known/jwks.json
+
+
+i18n:
+  baseName: i18n/messages
+  defaultLocale: pt_BR
+
+security:
+  jwt:
+    secret: secret
+    expirationMs: 120000
+    rolePrefix: roles
+    private.key: classpath:certificado\app.key
+    public.key: classpath:certificado\app.pub
+
+springdoc:
+  api-docs:
+    path: /javainuse-openapi
+
+
+server:
+  servlet:
+    context-path: /api/v1
+
+endpoints:
+  viacep: https://viacep.com.br/ws
+  ibge: https://servicodados.ibge.gov.br/api/v1/localidades/estados
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: INFO
+#    org.springframework.boot.autoconfigure: DEBUG
